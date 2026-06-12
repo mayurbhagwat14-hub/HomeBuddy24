@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build
+dist/
+build/
+
+# Temporary files
+temp/
+*.tmp
+
+# MongoDB
+data/
+
+# Firebase Config
+config/firebase-service-account.json
+
+# Test and Debug Scripts
+test-*.js
+test*.js
+debug_*.js
+diagnose-*.js
+
+# Local Inspection and Migration Scripts
+inspect_*.js
+check-*.js
+migrate*.js
+
+# Local JSON data exports
+homster-*.json
+cloudinary-*.json
