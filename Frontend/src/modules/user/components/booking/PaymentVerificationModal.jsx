@@ -26,6 +26,20 @@ const PaymentVerificationModal = ({ isOpen, onClose, booking, onPayOnline }) => 
     }
   }, [isOpen]);
 
+  // Lock body scroll when modal is open to prevent scroll bleed
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   if (!isOpen || !booking) return null;
 
   // --- 1. Total & Breakdown Calculations ---

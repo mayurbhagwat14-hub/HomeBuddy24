@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 import { themeColors } from '../../../../theme';
 import api from '../../../../services/api';
 
-const NotificationBell = ({ notificationCount = 0 }) => {
+const NotificationBell = ({ notificationCount = 0, variant = 'default' }) => {
   const navigate = useNavigate();
   const bellRef = useRef(null);
   const bellButtonRef = useRef(null);
@@ -38,6 +38,27 @@ const NotificationBell = ({ notificationCount = 0 }) => {
     const interval = setInterval(fetchUnreadCount, 60000);
     return () => clearInterval(interval);
   }, []);
+
+  if (variant === 'glass') {
+    return (
+      <button 
+        className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center relative hover:bg-white/30 transition-colors border border-white/20"
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate('/user/notifications');
+        }}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        {/* Red dot indicator */}
+        {count > 0 && (
+          <div className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-[#3B826D]"></div>
+        )}
+      </button>
+    );
+  }
 
   return (
     <div
@@ -134,7 +155,7 @@ const NotificationBell = ({ notificationCount = 0 }) => {
         />
       </button>
 
-      {/* 4. Active Badge (Moved outside for robustness and to prevent clipping) */}
+      {/* 4. Active Badge */}
       {count > 0 && (
         <span
           className="absolute -top-1.5 -right-1.5 bg-gradient-to-br from-red-500 to-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center z-20"
