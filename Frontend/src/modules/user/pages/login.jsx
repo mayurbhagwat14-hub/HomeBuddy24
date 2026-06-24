@@ -63,8 +63,12 @@ const Login = () => {
     // Zod Validation
     const validationResult = phoneSchema.safeParse({ phone: phoneNumber });
     if (!validationResult.success) {
+<<<<<<< HEAD
       const errorMessage = validationResult.error?.errors?.[0]?.message || validationResult.error?.issues?.[0]?.message || "Invalid phone number";
       toast.error(errorMessage);
+=======
+      toast.error(validationResult.error.errors[0].message);
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
       return;
     }
 
@@ -277,7 +281,11 @@ const Login = () => {
             </form>
           ) : (
             <form className="space-y-6 relative z-10" onSubmit={handleOtpSubmit}>
+<<<<<<< HEAD
               <div className="flex justify-center gap-1.5 sm:gap-3 py-4 animate-stagger-1 animate-fade-in">
+=======
+              <div className="flex justify-center gap-2 sm:gap-3 py-4 animate-stagger-1 animate-fade-in">
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
                 {otp.map((digit, index) => (
                   <input
                     key={index}
@@ -289,7 +297,11 @@ const Login = () => {
                     value={digit}
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(index, e)}
+<<<<<<< HEAD
                     className="w-10 sm:w-12 h-12 sm:h-16 text-center text-xl sm:text-3xl font-black bg-white/50 border-white rounded-[12px] sm:rounded-[16px] focus:ring-2 focus:ring-[#008080]/20 focus:border-[#008080] transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:-translate-y-1 text-gray-900"
+=======
+                    className="w-11 h-14 sm:w-12 sm:h-16 text-center text-2xl sm:text-3xl font-black bg-white/50 border-white rounded-[16px] focus:ring-2 focus:ring-[#008080]/20 focus:border-[#008080] transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.02)] focus:-translate-y-1 text-gray-900"
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
                     style={{ caretColor: brandColor }}
                   />
                 ))}

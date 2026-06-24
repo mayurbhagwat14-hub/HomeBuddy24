@@ -1,4 +1,8 @@
 import React, { memo } from 'react';
+<<<<<<< HEAD
+=======
+import { themeColors } from '../../../../theme';
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
 import OptimizedImage from '../../../../components/common/OptimizedImage';
 import OptimizedVideo from '../../../../components/common/OptimizedVideo';
 
@@ -10,6 +14,7 @@ const PromoCard = memo(({ title, subtitle, buttonText, image, onClick, className
 
   return (
     <div
+<<<<<<< HEAD
       className={`relative rounded-[20px] overflow-hidden w-[85vw] sm:w-[320px] md:w-[380px] aspect-[1.8/1] cursor-pointer transition-all duration-300 active:scale-[0.98] flex-shrink-0 group ${className}`}
       onClick={onClick}
     >
@@ -17,11 +22,24 @@ const PromoCard = memo(({ title, subtitle, buttonText, image, onClick, className
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10 pointer-events-none" />
       
       {/* Background Image/Video */}
+=======
+      className={`relative rounded-[24px] overflow-hidden w-[88vw] sm:w-[360px] md:w-[420px] aspect-[16/9] sm:aspect-[2/1] cursor-pointer transition-all duration-500 hover:shadow-[0_15px_40px_rgba(0,128,128,0.2)] hover:-translate-y-1 active:scale-95 border border-teal-50 flex-shrink-0 ${className}`}
+      style={{
+        boxShadow: '0 8px 25px rgba(0,0,0,0.06)',
+        backdropFilter: 'blur(10px)'
+      }}
+      onClick={onClick}
+    >
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
       {image ? (
         isVideo ? (
           <OptimizedVideo
             src={image}
+<<<<<<< HEAD
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+=======
+            className="w-full h-full object-cover"
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
             autoPlay
             loop
             muted
@@ -31,6 +49,7 @@ const PromoCard = memo(({ title, subtitle, buttonText, image, onClick, className
           <OptimizedImage
             src={image}
             alt={title || 'Promo'}
+<<<<<<< HEAD
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
         )
@@ -61,6 +80,16 @@ const PromoCard = memo(({ title, subtitle, buttonText, image, onClick, className
           {buttonText || 'Claim'}
         </button>
       </div>
+=======
+            className="w-full h-full object-cover"
+          />
+        )
+      ) : (
+        <div className="w-full h-full flex items-center justify-center bg-gray-200">
+          <span className="text-gray-400 text-sm">Image</span>
+        </div>
+      )}
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
     </div>
   );
 });

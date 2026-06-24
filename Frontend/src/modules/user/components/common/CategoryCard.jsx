@@ -34,15 +34,26 @@ const CategoryCard = memo(({ icon, title, onClick, hasSaleBadge = false, index =
       }}
     >
       <div
+<<<<<<< HEAD
         className="w-[76px] h-[76px] rounded-[22px] flex items-center justify-center mb-2.5 relative flex-shrink-0 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1 bg-white border border-gray-100/60"
+=======
+        className="w-[72px] h-[72px] rounded-[20px] flex items-center justify-center mb-2.5 relative flex-shrink-0 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1 bg-white border border-gray-100/60"
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
         style={{
           boxShadow: '0 4px 14px -2px rgba(0,0,0,0.03), inset 0 -2px 6px rgba(0,0,0,0.01)',
         }}
       >
+<<<<<<< HEAD
         <div className="absolute inset-0 rounded-[22px] bg-gradient-to-br from-[#008080]/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         {icon || (
           <svg
             className="w-8 h-8 text-gray-400 transition-colors duration-300"
+=======
+        <div className="absolute inset-0 rounded-[20px] bg-gradient-to-br from-[#008080]/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        {icon || (
+          <svg
+            className="w-7 h-7 text-gray-400 transition-colors duration-300"
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
             style={{ color: 'inherit' }}
             fill="none"
             stroke="currentColor"

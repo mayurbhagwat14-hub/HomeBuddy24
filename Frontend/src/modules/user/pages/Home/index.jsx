@@ -450,7 +450,34 @@ const Home = () => {
   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen pb-20 relative bg-slate-50">
+=======
+    <div className="min-h-screen pb-20 relative bg-white">
+      {/* Refined Brand Mesh Gradient Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(at 0% 0%, ${themeColors?.brand?.teal || '#347989'}25 0%, transparent 70%),
+              radial-gradient(at 100% 0%, ${themeColors?.brand?.yellow || '#D68F35'}20 0%, transparent 70%),
+              radial-gradient(at 100% 100%, ${themeColors?.brand?.orange || '#BB5F36'}15 0%, transparent 75%),
+              radial-gradient(at 0% 100%, ${themeColors?.brand?.teal || '#347989'}10 0%, transparent 70%),
+              radial-gradient(at 50% 50%, ${themeColors?.brand?.teal || '#347989'}03 0%, transparent 100%),
+              #FFFFFF
+            `
+          }}
+        />
+        {/* Elegant Dot Grid Pattern */}
+        <div className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `radial-gradient(${themeColors?.brand?.teal || '#347989'} 0.8px, transparent 0.8px)`,
+            backgroundSize: '32px 32px'
+          }}
+        />
+      </div>
+
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
       <motion.div
         className="relative z-10"
         initial="hidden"
@@ -459,6 +486,7 @@ const Home = () => {
       >
         <motion.div
           variants={itemVariants}
+<<<<<<< HEAD
           className="sticky top-0 z-50 transition-all duration-300 overflow-hidden shadow-sm"
           style={{ 
             backgroundColor: '#3B826D',
@@ -478,18 +506,39 @@ const Home = () => {
           </div>
           
           <div className="pt-1 relative z-10">
+=======
+          className="sticky top-0 z-50 transition-all duration-300 overflow-hidden shadow-xl"
+          style={{ 
+            backgroundColor: '#009688',
+            borderBottomLeftRadius: '32px',
+            borderBottomRightRadius: '32px',
+          }}
+        >
+          {/* Subtle wavy pattern overlay could go here, for now it's solid teal */}
+          <div className="absolute inset-0 pointer-events-none opacity-20" />
+          
+          <div className="pt-2 relative z-10">
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
             <Header
               location={address}
               onLocationClick={handleLocationClick}
               darkTheme={true}
             />
           </div>
+<<<<<<< HEAD
           <div className="px-5 pb-2 pt-3 max-w-lg lg:max-w-2xl mx-auto w-full relative z-20">
+=======
+          <div className="px-5 pb-5 pt-1 max-w-lg lg:max-w-2xl mx-auto w-full">
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
             <SearchBar onInputClick={() => setIsSearchOpen(true)} />
           </div>
         </motion.div>
 
+<<<<<<< HEAD
         <main className="pt-4 space-y-4 pb-24 max-w-screen-xl mx-auto w-full">
+=======
+        <main className="pt-6 space-y-8 pb-24 max-w-screen-xl mx-auto w-full">
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
           {!isLocationSupported ? (
             <div className="flex flex-col items-center justify-center pt-20 pb-10 px-6 text-center min-h-[60vh]">
               <div className="w-24 h-24 bg-red-50 rounded-full flex items-center justify-center mb-6">
@@ -515,6 +564,7 @@ const Home = () => {
             </div>
           ) : (
             <>
+<<<<<<< HEAD
               {/* Unified Header Section (Categories + Banners) */}
               <motion.section variants={itemVariants} initial="hidden" animate="visible" className="relative pb-2">
                 <div className="absolute inset-0 bg-gradient-to-b from-blue-50/40 to-transparent pointer-events-none -z-10 rounded-b-3xl" />
@@ -559,6 +609,40 @@ const Home = () => {
                   </div>
                 )}
               </motion.section>
+=======
+              {/* Hero Section - Promo Carousel */}
+              {homeContent?.isPromosVisible !== false && (
+                <motion.section variants={itemVariants} initial="hidden" animate="visible" className="relative z-0">
+                  <PromoCarousel
+                    promos={(homeContent?.promos || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map(promo => ({
+                      id: promo.id || promo._id,
+                      title: promo.title || '',
+                      subtitle: promo.subtitle || promo.description || '',
+                      buttonText: promo.buttonText || 'Book now',
+                      className: promo.gradientClass || 'from-[#00A6A6] to-[#008a8a]',
+                      image: toAssetUrl(promo.imageUrl),
+                      targetCategoryId: promo.targetCategoryId,
+                      slug: promo.slug,
+                      scrollToSection: promo.scrollToSection,
+                      route: '/'
+                    }))}
+                    onPromoClick={handlePromoClick}
+                  />
+                </motion.section>
+              )}
+
+              {/* Categories Section */}
+              {homeContent?.isCategoriesVisible !== false && (
+                <motion.section variants={itemVariants} initial="hidden" animate="visible" className="relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-b from-blue-50/30 to-transparent pointer-events-none -z-10" />
+                  <ServiceCategories
+                    categories={categories}
+                    onCategoryClick={handleCategoryClick}
+                    onSeeAllClick={() => { }}
+                  />
+                </motion.section>
+              )}
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
 
               {/* Scrap Promotion Section */}
               {homeContent?.isScrapVisible !== false && (
@@ -604,6 +688,7 @@ const Home = () => {
                 </motion.div>
               )}
 
+<<<<<<< HEAD
               {/* Most Booked / Popular Services */}
               {homeContent?.isBookedVisible !== false && (
                 <motion.div variants={itemVariants} initial="hidden" animate="visible">
@@ -611,6 +696,11 @@ const Home = () => {
                     <h2 className="text-[17px] font-bold text-gray-800 tracking-tight">Popular Services</h2>
                     <span className="text-[#3B826D] text-[13px] font-semibold cursor-pointer">See all</span>
                   </div>
+=======
+              {/* Most Booked */}
+              {homeContent?.isBookedVisible !== false && (
+                <motion.div variants={itemVariants} initial="hidden" animate="visible">
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
                   <Suspense fallback={<div className="h-40 bg-gray-50 animate-pulse rounded-xl mx-4" />}>
                     <MostBookedServices
                       services={(homeContent?.booked || []).sort((a, b) => (a.order || 0) - (b.order || 0)).map(item => ({

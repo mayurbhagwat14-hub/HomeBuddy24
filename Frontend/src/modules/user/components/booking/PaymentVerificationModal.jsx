@@ -26,6 +26,7 @@ const PaymentVerificationModal = ({ isOpen, onClose, booking, onPayOnline }) => 
     }
   }, [isOpen]);
 
+<<<<<<< HEAD
   // Lock body scroll when modal is open to prevent scroll bleed
   useEffect(() => {
     if (isOpen) {
@@ -40,6 +41,8 @@ const PaymentVerificationModal = ({ isOpen, onClose, booking, onPayOnline }) => 
     };
   }, [isOpen]);
 
+=======
+>>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
   if (!isOpen || !booking) return null;
 
   // --- 1. Total & Breakdown Calculations ---
