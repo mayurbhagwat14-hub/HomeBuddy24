@@ -600,11 +600,7 @@ const BillingPage = () => {
             );
           })}
         </div>
-<<<<<<< HEAD
         <div className="fixed bottom-[88px] left-4 right-4 p-3 bg-white/90 backdrop-blur-md border border-gray-100 rounded-2xl shadow-xl z-50 flex gap-3">
-=======
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-md border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50 flex gap-3">
->>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
           <button onClick={() => setViewMode('timeline')} className="flex-1 py-3.5 bg-white text-gray-700 font-bold rounded-xl border border-gray-200">
             Save & Exit
           </button>
@@ -662,11 +658,7 @@ const BillingPage = () => {
             );
           })}
         </div>
-<<<<<<< HEAD
         <div className="fixed bottom-[88px] left-4 right-4 p-3 bg-white/90 backdrop-blur-md border border-gray-100 rounded-2xl shadow-xl z-50 flex gap-3">
-=======
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-md border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50 flex gap-3">
->>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
           <button onClick={() => setViewMode('timeline')} className="flex-1 py-3.5 bg-white text-gray-700 font-bold rounded-xl border border-gray-200">
             Save & Exit
           </button>
@@ -1010,11 +1002,7 @@ const BillingPage = () => {
         )}
       </div>
 
-<<<<<<< HEAD
       <div className="fixed bottom-[88px] left-4 right-4 p-3 bg-white/90 backdrop-blur-md border border-gray-100 rounded-2xl shadow-xl z-50 flex gap-3">
-=======
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-md border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50 flex gap-3">
->>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
         {currentStep === 1 && (
           <button onClick={() => setCurrentStep(2)} className="w-full py-3.5 bg-gray-900 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg">
             Next: Parts <FiArrowRight />

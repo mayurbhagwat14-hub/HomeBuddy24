@@ -5,11 +5,7 @@ import { gsap } from 'gsap';
 import { themeColors } from '../../../../theme';
 import api from '../../../../services/api';
 
-<<<<<<< HEAD
 const NotificationBell = ({ notificationCount = 0, variant = 'default' }) => {
-=======
-const NotificationBell = ({ notificationCount = 0 }) => {
->>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
   const navigate = useNavigate();
   const bellRef = useRef(null);
   const bellButtonRef = useRef(null);
@@ -43,7 +39,6 @@ const NotificationBell = ({ notificationCount = 0 }) => {
     return () => clearInterval(interval);
   }, []);
 
-<<<<<<< HEAD
   if (variant === 'glass') {
     return (
       <button 
@@ -65,8 +60,6 @@ const NotificationBell = ({ notificationCount = 0 }) => {
     );
   }
 
-=======
->>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
   return (
     <div
       ref={bellButtonRef}
@@ -162,11 +155,7 @@ const NotificationBell = ({ notificationCount = 0 }) => {
         />
       </button>
 
-<<<<<<< HEAD
       {/* 4. Active Badge */}
-=======
-      {/* 4. Active Badge (Moved outside for robustness and to prevent clipping) */}
->>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
       {count > 0 && (
         <span
           className="absolute -top-1.5 -right-1.5 bg-gradient-to-br from-red-500 to-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center z-20"

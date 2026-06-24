@@ -355,17 +355,10 @@ const CashCollectionModal = ({
               style={{
                 background: booking?.paymentMethod === 'plan_benefit' && extraItems.length === 0
                   ? 'linear-gradient(135deg, #10B981, #059669)'
-<<<<<<< HEAD
                   : 'linear-gradient(135deg, #43a9b9, #347989)',
                 boxShadow: booking?.paymentMethod === 'plan_benefit' && extraItems.length === 0
                   ? '0 8px 16px -4px rgba(16, 185, 129, 0.4)'
                   : '0 8px 16px -4px rgba(52, 121, 137, 0.4)',
-=======
-                  : 'linear-gradient(135deg, #3B82F6, #2563EB)',
-                boxShadow: booking?.paymentMethod === 'plan_benefit' && extraItems.length === 0
-                  ? '0 8px 16px -4px rgba(16, 185, 129, 0.4)'
-                  : '0 8px 16px -4px rgba(59, 130, 246, 0.4)',
->>>>>>> c34bad6595e739083b7fdef20687f1c2dec39a86
               }}
             >
               {submitting ? 'Processing...' : (
