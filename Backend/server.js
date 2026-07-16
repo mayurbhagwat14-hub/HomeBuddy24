@@ -33,7 +33,8 @@ const allowedOrigins = [
   'http://localhost:5174',
   'https://www.homebuddy.in',
   'https://homebuddy.in',
-  'https://api.homebuddy.in'
+  'https://api.homebuddy.in',
+  'https://home-buddy24-omega.vercel.app'
 ];
 
 if (process.env.FRONTEND_URL) {
