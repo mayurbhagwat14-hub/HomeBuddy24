@@ -55,7 +55,7 @@ const serviceSchema = new mongoose.Schema({
 });
 
 // Generate slug from title before saving
-serviceSchema.pre('validate', async function (next) {
+serviceSchema.pre('validate', function (next) {
   if (this.isModified('title') && !this.slug) {
     this.slug = this.title
       .toLowerCase()

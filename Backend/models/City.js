@@ -80,7 +80,7 @@ citySchema.pre('validate', function (next) {
 });
 
 // Handle side-effects before saving
-citySchema.pre('save', async function (next) {
+citySchema.pre('save', async function () {
   // Ensure only one default city
   if (this.isModified('isDefault') && this.isDefault) {
     await this.constructor.updateMany(
@@ -89,7 +89,7 @@ citySchema.pre('save', async function (next) {
     );
   }
 
-  next();
+  
 });
 
 

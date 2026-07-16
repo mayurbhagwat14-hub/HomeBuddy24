@@ -35,6 +35,24 @@
     ]
   },
   {
+    "title": "Store Products",
+    "route": "/admin/store-products",
+    "allowedRoles": [
+      "super_admin",
+      "admin"
+    ],
+    "children": []
+  },
+  {
+    "title": "Store Orders",
+    "route": "/admin/store-orders",
+    "allowedRoles": [
+      "super_admin",
+      "admin"
+    ],
+    "children": []
+  },
+  {
     "title": "Workers",
     "route": "/admin/workers",
     "allowedRoles": [

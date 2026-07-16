@@ -64,6 +64,26 @@ const PAYMENT_STATUS = {
   PLAN_COVERED: 'plan_covered' // For plan_benefit bookings until bill is finalized
 };
 
+// Store Product Status
+const STORE_PRODUCT_STATUS = {
+  PENDING: 'pending_approval',
+  APPROVED: 'approved',
+  REJECTED: 'rejected',
+  DEACTIVATED: 'deactivated'
+};
+
+// Store Order Status
+const STORE_ORDER_STATUS = {
+  BROADCASTED: 'broadcasted',
+  ACCEPTED: 'accepted',
+  ON_THE_WAY: 'on_the_way',
+  REACHED: 'reached',
+  DELIVERED: 'delivered',
+  CANCELLED: 'cancelled',
+  EXPIRED: 'expired',
+  UNFULFILLED: 'unfulfilled'
+};
+
 // Service Status
 const SERVICE_STATUS = {
   ACTIVE: 'active',
@@ -87,5 +107,7 @@ module.exports = {
   BOOKING_STATUS,
   PAYMENT_STATUS,
   SERVICE_STATUS,
-  BILL_STATUS
+  BILL_STATUS,
+  STORE_PRODUCT_STATUS,
+  STORE_ORDER_STATUS
 };

@@ -70,7 +70,14 @@ const notificationSchema = new mongoose.Schema({
       'scrap_accepted',
       'scrap_completed',
       'vendor_withdrawal_request',
-      'general'
+      'general',
+      'store_order_request',
+      'store_order_accepted',
+      'store_order_on_the_way',
+      'store_order_delivered',
+      'store_order_unfulfilled',
+      'store_product_approved',
+      'store_product_rejected'
     ],
     index: true
   },
@@ -92,7 +99,7 @@ const notificationSchema = new mongoose.Schema({
   },
   relatedType: {
     type: String,
-    enum: ['booking', 'payment', 'user', 'vendor', 'worker', 'service', 'scrap', 'withdrawal'],
+    enum: ['booking', 'payment', 'user', 'vendor', 'worker', 'service', 'scrap', 'withdrawal', 'store_order', 'store_product'],
     default: null
   },
   // Notification Status

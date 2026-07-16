@@ -269,13 +269,13 @@ vendorSchema.index({ geoLocation: '2dsphere' }); // Fast geo queries
 vendorSchema.index({ isOnline: 1, availability: 1, approvalStatus: 1 }); // Compound index for vendor search
 
 // Hash password before saving
-vendorSchema.pre('save', async function (next) {
+vendorSchema.pre('save', async function () {
   if (!this.isModified('password')) {
-    return next();
+    return;
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-  next();
+  
 });
 
 // Compare password method

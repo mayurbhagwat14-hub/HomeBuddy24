@@ -71,7 +71,7 @@ const Wallet = lazyLoad(() => import('../pages/Wallet'));
 const MyPlan = lazyLoad(() => import('../pages/MyPlan'));
 const PlanDetails = lazyLoad(() => import('../pages/MyPlan/PlanDetails'));
 const MyRating = lazyLoad(() => import('../pages/MyRating'));
-const AboutHomeBuddy24 = lazyLoad(() => import('../pages/AboutHomster'));
+const AboutHomeBuddy24 = lazyLoad(() => import('../pages/AboutHomebuddy'));
 const UpdateProfile = lazyLoad(() => import('../pages/UpdateProfile'));
 const Login = lazyLoad(() => import('../pages/login'));
 const Signup = lazyLoad(() => import('../pages/signup'));
@@ -80,6 +80,14 @@ const AddScrap = lazyLoad(() => import('../pages/Scrap/AddScrap'));
 const Notifications = lazyLoad(() => import('../pages/Notifications'));
 const HelpSupport = lazyLoad(() => import('../pages/HelpSupport'));
 const CancellationPolicy = lazyLoad(() => import('../pages/CancellationPolicy'));
+
+const Store = lazyLoad(() => import('../pages/Store'));
+const ProductDetail = lazyLoad(() => import('../pages/Store/ProductDetail'));
+const StoreCart = lazyLoad(() => import('../pages/Store/StoreCart'));
+const StoreCheckout = lazyLoad(() => import('../pages/Store/StoreCheckout'));
+const StoreOrderConfirmation = lazyLoad(() => import('../pages/Store/StoreOrderConfirmation'));
+const StoreOrders = lazyLoad(() => import('../pages/Store/StoreOrders'));
+const StoreOrderDetail = lazyLoad(() => import('../pages/Store/StoreOrderDetail'));
 
 // Loading fallback component
 import LogoLoader from '../../../components/common/LogoLoader';
@@ -99,7 +107,7 @@ const UserRoutes = () => {
   // useAppNotifications('user');
 
   // Pages where BottomNav should be shown
-  const bottomNavPages = ['/user/home', '/user/my-bookings', '/user/scrap', '/user/cart', '/user/account'];
+  const bottomNavPages = ['/user/home', '/user/my-bookings', '/user/scrap', '/user/cart', '/user/store', '/user/account'];
   const shouldShowBottomNav = bottomNavPages.includes(location.pathname);
 
   // Check if we hide the live booking card (e.g. if we are on the specific booking details or track page)
@@ -148,6 +156,15 @@ const UserRoutes = () => {
               <Route path="/notifications" element={<ProtectedRoute userType="user"><Notifications /></ProtectedRoute>} />
               <Route path="/help-support" element={<ProtectedRoute userType="user"><HelpSupport /></ProtectedRoute>} />
               <Route path="/cancellation-policy" element={<ProtectedRoute userType="user"><CancellationPolicy /></ProtectedRoute>} />
+
+              {/* Store Routes */}
+              <Route path="/store" element={<ProtectedRoute userType="user"><Store /></ProtectedRoute>} />
+              <Route path="/store/product/:id" element={<ProtectedRoute userType="user"><ProductDetail /></ProtectedRoute>} />
+              <Route path="/store/cart" element={<ProtectedRoute userType="user"><StoreCart /></ProtectedRoute>} />
+              <Route path="/store/checkout" element={<ProtectedRoute userType="user"><StoreCheckout /></ProtectedRoute>} />
+              <Route path="/store/order-confirmation" element={<ProtectedRoute userType="user"><StoreOrderConfirmation /></ProtectedRoute>} />
+              <Route path="/store/orders" element={<ProtectedRoute userType="user"><StoreOrders /></ProtectedRoute>} />
+              <Route path="/store/order/:id" element={<ProtectedRoute userType="user"><StoreOrderDetail /></ProtectedRoute>} />
 
               {/* Catch-all redirect to Home for invalid URLs like /user/home */}
               <Route path="*" element={<Navigate to="/user/home" replace />} />

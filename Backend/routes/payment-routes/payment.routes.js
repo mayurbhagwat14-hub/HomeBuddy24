@@ -10,6 +10,7 @@ const {
   processRefund,
   getPaymentHistory,
   confirmPayAtHome,
+  confirmStorePayOnDelivery,
   createPlanOrder,
   verifyPlanPayment,
   getUpgradeDetails
@@ -17,7 +18,14 @@ const {
 
 // Validation rules
 const createOrderValidation = [
-  body('bookingId').isMongoId().withMessage('Valid booking ID is required')
+  body('bookingId').optional().isMongoId().withMessage('Valid booking ID is required'),
+  body('storeOrderId').optional().isMongoId().withMessage('Valid store order ID is required'),
+  body().custom((value, { req }) => {
+    if (!req.body.bookingId && !req.body.storeOrderId) {
+      throw new Error('Valid booking ID or store order ID is required');
+    }
+    return true;
+  })
 ];
 
 const verifyPaymentValidation = [
@@ -41,6 +49,7 @@ router.post('/verify', authenticate, isUser, verifyPaymentValidation, verifyPaym
 router.post('/wallet', authenticate, isUser, walletPaymentValidation, processWalletPayment);
 router.post('/refund', authenticate, isUser, refundValidation, processRefund);
 router.post('/pay-at-home', authenticate, isUser, walletPaymentValidation, confirmPayAtHome);
+router.post('/store-pay-on-delivery', authenticate, isUser, confirmStorePayOnDelivery);
 router.get('/history', authenticate, isUser, getPaymentHistory);
 router.post('/plan/create-order', authenticate, isUser, createPlanOrder);
 router.post('/plan/verify', authenticate, isUser, verifyPlanPayment);

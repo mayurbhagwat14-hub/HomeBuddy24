@@ -41,11 +41,17 @@ const Header = ({ location, onLocationClick, darkTheme = false }) => {
                       ? location.split(',').map(p => p.trim()).filter(Boolean)
                       : location.split('-').map(p => p.trim()).filter(Boolean);
                     if (parts.length === 0) return 'Select Location';
-                    let area = parts[0];
-                    if (area.length <= 4 && parts[1]) {
-                      area = `${parts[0]}, ${parts[1]}`;
+                    
+                    // Filter out purely numeric parts or very short parts (like flat numbers)
+                    const meaningfulParts = parts.filter(p => isNaN(p) && p.length > 2);
+                    
+                    if (meaningfulParts.length === 0) return parts[0];
+                    
+                    if (meaningfulParts.length > 1 && meaningfulParts[0].length <= 10) {
+                      return `${meaningfulParts[0]}, ${meaningfulParts[1]}`;
                     }
-                    return area;
+                    
+                    return meaningfulParts[0];
                   })()}
                 </span>
                 <HiChevronDown className="w-4 h-4 text-white/80 ml-1" />

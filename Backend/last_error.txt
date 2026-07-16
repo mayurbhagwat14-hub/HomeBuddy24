@@ -1,0 +1,5 @@
+ValidationError: StoreOrder validation failed: orderNumber: Path `orderNumber` is required.
+    at Document.invalidate (C:\Users\madha\Desktop\Homebuddy\Backend\node_modules\mongoose\lib\document.js:3371:32)
+    at C:\Users\madha\Desktop\Homebuddy\Backend\node_modules\mongoose\lib\document.js:3132:17
+    at C:\Users\madha\Desktop\Homebuddy\Backend\node_modules\mongoose\lib\schemaType.js:1446:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)

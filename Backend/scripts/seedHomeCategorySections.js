@@ -94,19 +94,19 @@ const seedHomeCategorySections = async () => {
         cards: [
           {
             title: 'Home Wiring Installation',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135138/Homster/electricity/service/home-wiring.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135138/Homebuddy/electricity/service/home-wiring.jpg',
             badge: '',
             targetCategoryId: categories['home-wiring-installation']._id
           },
           {
             title: 'Panel Upgrade & Repair',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135139/Homster/electricity/service/electrical-panel-upgrade.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135139/Homebuddy/electricity/service/electrical-panel-upgrade.jpg',
             badge: '',
             targetCategoryId: categories['panel-upgrade-repair']._id
           },
           {
             title: 'Smart Home Setup',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135140/Homster/electricity/service/smart-home-setup.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135140/Homebuddy/electricity/service/smart-home-setup.jpg',
             badge: 'NEW',
             targetCategoryId: categories['smart-home-setup']._id
           }
@@ -119,25 +119,25 @@ const seedHomeCategorySections = async () => {
         cards: [
           {
             title: 'AC Service and Repair',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135151/Homster/appliance/service/ac-repair.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135151/Homebuddy/appliance/service/ac-repair.jpg',
             badge: '',
             targetCategoryId: categories['ac-service-repair']._id
           },
           {
             title: 'Washing Machine Repair',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135152/Homster/appliance/service/washing-machine-repair-.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135152/Homebuddy/appliance/service/washing-machine-repair-.jpg',
             badge: '',
             targetCategoryId: categories['washing-machine-repair']._id
           },
           {
             title: 'Water Heater Repair',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135154/Homster/appliance/service/water-heater-repair.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135154/Homebuddy/appliance/service/water-heater-repair.jpg',
             badge: '',
             targetCategoryId: categories['water-heater-repair']._id
           },
           {
             title: 'Refrigerator Repair',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135154/Homster/appliance/service/water-heater-repair.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135154/Homebuddy/appliance/service/water-heater-repair.jpg',
             badge: '',
             targetCategoryId: categories['refrigerator-repair']._id
           }
@@ -150,25 +150,25 @@ const seedHomeCategorySections = async () => {
         cards: [
           {
             title: 'Drill & hang (wall decor)',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135147/Homster/electricity/service/wiring.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135147/Homebuddy/electricity/service/wiring.jpg',
             badge: '',
             targetCategoryId: categories['drill-hang']._id
           },
           {
             title: 'Tap repair',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135147/Homster/electricity/service/wiring.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135147/Homebuddy/electricity/service/wiring.jpg',
             badge: '',
             targetCategoryId: categories['tap-repair']._id
           },
           {
             title: 'Fan repair, exhaust, etc.',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135144/Homster/electricity/service/fan.png',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135144/Homebuddy/electricity/service/fan.png',
             badge: '',
             targetCategoryId: categories['fan-repair']._id
           },
           {
             title: 'Switch & Socket Installation',
-            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135141/Homster/electricity/service/switch-socket.jpg',
+            imageUrl: 'https://res.cloudinary.com/shubhamcloudinary/image/upload/v1766135141/Homebuddy/electricity/service/switch-socket.jpg',
             badge: '',
             targetCategoryId: categories['switch-socket-installation']._id
           }

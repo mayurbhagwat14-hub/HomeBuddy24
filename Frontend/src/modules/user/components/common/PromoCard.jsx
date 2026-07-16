@@ -48,10 +48,7 @@ const PromoCard = memo(({ title, subtitle, buttonText, image, onClick, className
           {title || 'Get Special Offer'}
         </h3>
         
-        <div className="text-white font-medium text-[13px] mb-2 flex items-baseline gap-1">
-          <span className="opacity-90">Up to</span>
-          <span className="text-[28px] font-black">40%</span>
-        </div>
+
         
         <p className="text-white/70 text-[10px] mb-3 line-clamp-1">
           {subtitle || 'On all home services today'}

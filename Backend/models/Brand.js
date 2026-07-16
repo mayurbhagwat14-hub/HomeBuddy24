@@ -90,7 +90,7 @@ const brandSchema = new mongoose.Schema({
 });
 
 // Generate slug from title before saving
-brandSchema.pre('save', async function (next) {
+brandSchema.pre('save', function (next) {
   if (this.isModified('title') && !this.slug) {
     this.slug = this.title
       .toLowerCase()

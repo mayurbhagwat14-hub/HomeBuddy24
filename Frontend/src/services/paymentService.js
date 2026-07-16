@@ -12,6 +12,12 @@ export const paymentService = {
     return response.data;
   },
 
+  // Create Razorpay order for store order payment
+  createStoreOrderPayment: async (storeOrderId) => {
+    const response = await api.post('/payments/create-order', { storeOrderId });
+    return response.data;
+  },
+
   // Verify payment (webhook handler)
   verifyPayment: async (paymentData) => {
     const response = await api.post('/payments/verify', paymentData);
@@ -46,13 +52,19 @@ export const paymentService = {
     return response.data;
   },
 
+  // Confirm Pay on Delivery for Store Orders
+  confirmStorePayOnDelivery: async (storeOrderId) => {
+    const response = await api.post('/payments/store-pay-on-delivery', { storeOrderId });
+    return response.data;
+  },
+
   // Create Razorpay order for plan subscription
   createPlanOrder: async (planId) => {
     const response = await api.post('/payments/plan/create-order', { planId });
     return response.data;
   },
 
-  // Verify plan payment
+  // Verify upgrade payment
   verifyPlanPayment: async (paymentData) => {
     const response = await api.post('/payments/plan/verify', paymentData);
     return response.data;

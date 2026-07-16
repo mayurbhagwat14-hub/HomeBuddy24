@@ -25,7 +25,7 @@ const LogoLoader = ({ fullScreen = false, overlay = false, inline = false, size 
 
   const { branding } = useBranding();
   const appName = branding?.appName || "HomeBuddy24";
-  const logoSrc = branding?.appLogo || "/Homster-logo.png";
+  const logoSrc = branding?.appLogo || "/HomeBuddy24-logo.png";
   
   const finalLogoSrc = logoSrc.startsWith('http') || logoSrc.startsWith('/') 
     ? logoSrc 
@@ -51,7 +51,7 @@ const LogoLoader = ({ fullScreen = false, overlay = false, inline = false, size 
             <img 
               src={finalLogoSrc} 
               alt="Icon" 
-              className={logoSrc === "/Homster-logo.png" 
+              className={logoSrc === "/HomeBuddy24-logo.png" 
                 ? "absolute top-0 left-0 h-full w-auto max-w-none object-left" 
                 : "h-full w-full object-contain"}
             />

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, memo, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { BiRupee } from 'react-icons/bi';
-import { FiHome, FiBriefcase, FiUsers, FiUser } from 'react-icons/fi';
-import { HiHome, HiBriefcase, HiUsers, HiUser } from 'react-icons/hi';
+import { FiHome, FiBriefcase, FiUsers, FiUser, FiShoppingBag } from 'react-icons/fi';
+import { HiHome, HiBriefcase, HiUsers, HiUser, HiShoppingBag } from 'react-icons/hi';
 import { FaWallet } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { vendorTheme as themeColors } from '../../../../theme';
@@ -38,7 +38,6 @@ const BottomNav = memo(() => {
     return [
       { path: '/vendor/dashboard', icon: FiHome, activeIcon: HiHome },
       { path: '/vendor/jobs', icon: FiBriefcase, activeIcon: HiBriefcase, badge: badgeCount },
-      { path: '/vendor/workers', icon: FiUsers, activeIcon: HiUsers },
       { path: '/vendor/wallet', icon: FaWallet, activeIcon: FaWallet },
       { path: '/vendor/profile', icon: FiUser, activeIcon: HiUser },
     ];

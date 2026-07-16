@@ -1,19 +1,22 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FiHome, FiGift, FiShoppingCart, FiUser, FiTrash2, FiCalendar } from 'react-icons/fi';
-import { HiHome, HiGift, HiShoppingCart, HiUser, HiTrash, HiCalendar } from 'react-icons/hi';
+import { FiHome, FiCalendar, FiUser, FiShoppingCart, FiShoppingBag } from 'react-icons/fi';
+import { HiHome, HiShoppingBag, HiShoppingCart, HiUser, HiCalendar } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 import { useCart } from '../../../../context/CartContext';
+import { useStoreCart } from '../../../../context/StoreCartContext';
 import { themeColors } from '../../../../theme';
 
 const BottomNav = React.memo(() => {
   const navigate = useNavigate();
   const location = useLocation();
   const { cartCount } = useCart();
+  const { getItemCount: getStoreItemCount } = useStoreCart();
 
   const navItems = useMemo(() => [
     { id: 'home', icon: FiHome, filledIcon: HiHome, path: '/user/home', label: 'Home' },
     { id: 'bookings', icon: FiCalendar, filledIcon: HiCalendar, path: '/user/my-bookings', label: 'Bookings' },
+    { id: 'store', icon: FiShoppingBag, filledIcon: HiShoppingBag, path: '/user/store', label: 'Store' },
     { id: 'cart', icon: FiShoppingCart, filledIcon: HiShoppingCart, path: '/user/cart', isCart: true, label: 'Cart' },
     { id: 'account', icon: FiUser, filledIcon: HiUser, path: '/user/account', label: 'Account' },
   ], []);
@@ -21,6 +24,7 @@ const BottomNav = React.memo(() => {
   const getActiveTab = () => {
     if (location.pathname === '/user/home' || location.pathname === '/user/home/') return 'home';
     if (location.pathname === '/user/my-bookings') return 'bookings';
+    if (location.pathname === '/user/store') return 'store';
     if (location.pathname === '/user/cart') return 'cart';
     if (location.pathname === '/user/account') return 'account';
     return 'home';
@@ -38,6 +42,7 @@ const BottomNav = React.memo(() => {
         {navItems.map((item) => {
           const isActive = activeTab === item.id;
           const IconComponent = isActive ? item.filledIcon : item.icon;
+          const count = item.id === 'cart' ? cartCount : (item.id === 'store' ? getStoreItemCount() : 0);
 
           return (
             <button
@@ -69,7 +74,7 @@ const BottomNav = React.memo(() => {
                        {item.label}
                      </span>
                   )}
-                  {(item.isCart && cartCount > 0) && (
+                  {count > 0 && (
                     <motion.span
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
@@ -85,7 +90,7 @@ const BottomNav = React.memo(() => {
                         zIndex: 50,
                       }}
                     >
-                      {cartCount > 9 ? '9+' : cartCount}
+                      {count > 9 ? '9+' : count}
                     </motion.span>
                   )}
                 </motion.div>

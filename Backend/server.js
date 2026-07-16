@@ -31,9 +31,9 @@ app.use(helmet({
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
-  'https://www.homster.in',
-  'https://homster.in',
-  'https://api.homster.in'
+  'https://www.homebuddy.in',
+  'https://homebuddy.in',
+  'https://api.homebuddy.in'
 ];
 
 if (process.env.FRONTEND_URL) {
@@ -102,7 +102,7 @@ app.use('/api', rateLimiter);
 app.get('/health', (req, res) => {
   res.json({
     success: true,
-    message: 'Homster API is running',
+    message: 'Homebuddy API is running',
     timestamp: new Date().toISOString()
   });
 });
@@ -169,6 +169,8 @@ app.use('/api/user/wallet', require('./routes/user-routes/userWallet.routes'));
 app.use('/api/users/bookings', require('./routes/user-routes/booking.routes'));
 app.use('/api/users', require('./routes/user-routes/cart.routes'));
 app.use('/api/users/fcm-tokens', require('./routes/user-routes/fcmToken.routes'));
+app.use('/api/users/store', require('./routes/user-routes/store.routes'));
+app.use('/api/users/store-orders', require('./routes/user-routes/storeOrder.routes'));
 
 // Scrap routes
 const scrapRoutes = require('./routes/scrap.routes');
@@ -186,6 +188,7 @@ app.use('/api/vendors/workers', require('./routes/vendor-routes/worker.routes'))
 app.use('/api/vendors/fcm-tokens', require('./routes/vendor-routes/fcmToken.routes'));
 app.use('/api/vendors', require('./routes/vendor-routes/vendorBill.routes'));
 app.use('/api/vendors/catalog', require('./routes/vendor-routes/catalog.routes'));
+
 
 // Worker routes
 app.use('/api/workers/auth', require('./routes/worker-routes/auth.routes'));
@@ -207,6 +210,8 @@ app.use('/api/admin', require('./routes/admin-routes/brandManagement.routes'));
 app.use('/api/admin', require('./routes/admin-routes/serviceManagement.routes'));
 app.use('/api/admin', require('./routes/admin-routes/vendorCatalogManagement.routes'));
 app.use('/api/admin', require('./routes/admin-routes/homePageManagement.routes'));
+app.use('/api/admin/store', require('./routes/admin-routes/storeProductManagement.routes'));
+app.use('/api/admin/store-orders', require('./routes/admin-routes/storeOrderManagement.routes'));
 app.use('/api/admin', require('./routes/admin-routes/bookingManagement.routes'));
 app.use('/api/admin', require('./routes/admin-routes/paymentManagement.routes'));
 app.use('/api/admin', require('./routes/admin-routes/transactionManagement.routes'));
@@ -282,6 +287,8 @@ if (process.env.VERCEL !== '1' && !process.env.VERCEL_ENV) {
   const { initializeScheduler } = require('./services/bookingScheduler');
   initializeScheduler(getIO());
   console.log('[Server] Booking Scheduler initialized for wave-based alerting');
+
+
 
   // Handle unhandled promise rejections
   process.on('unhandledRejection', (err) => {

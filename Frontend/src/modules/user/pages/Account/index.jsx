@@ -24,7 +24,8 @@ import {
   FiGift,
   FiShield,
   FiZap,
-  FiCheckCircle
+  FiCheckCircle,
+  FiPackage
 } from 'react-icons/fi';
 import { MdAccountBalanceWallet } from 'react-icons/md';
 import NotificationBell from '../../components/common/NotificationBell';
@@ -367,6 +368,11 @@ const Account = () => {
               icon={FiClipboard}
               label="My Bookings"
               onClick={() => navigate('/user/my-bookings')}
+            />
+            <MenuItem
+              icon={FiPackage}
+              label="My Store Orders"
+              onClick={() => navigate('/user/store/orders')}
             />
             <MenuItem
               icon={FiStar}

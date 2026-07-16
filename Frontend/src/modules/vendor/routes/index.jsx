@@ -61,8 +61,10 @@ const Notifications = lazyLoad(() => import('../pages/Notifications'));
 const SettlementRequest = lazyLoad(() => import('../pages/Wallet/SettlementRequest'));
 const SettlementHistory = lazyLoad(() => import('../pages/Wallet/SettlementHistory'));
 const MyRatings = lazyLoad(() => import('../pages/MyRatings'));
-const AboutHomeBuddy24 = lazyLoad(() => import('../pages/AboutHomster'));
+const AboutHomeBuddy24 = lazyLoad(() => import('../pages/AboutHomebuddy'));
 const BillingPage = lazyLoad(() => import('../pages/BillingPage'));
+
+
 
 // Loading fallback component
 import LogoLoader from '../../../components/common/LogoLoader';
@@ -74,8 +76,7 @@ const LoadingFallback = () => (
 const VendorRoutes = () => {
   const location = useLocation();
 
-  // Check if current route should hide bottom nav (auth routes or map)
-  // Check if current route should hide bottom nav (auth routes or map or booking alert)
+  // Check if current route should hide bottom nav
   const shouldHideBottomNav = location.pathname === '/vendor/login' ||
     location.pathname === '/vendor/signup' ||
     location.pathname.endsWith('/map') ||
@@ -113,6 +114,9 @@ const VendorRoutes = () => {
               <Route path="/wallet/withdraw" element={<ProtectedRoute userType="vendor"><WithdrawalRequest /></ProtectedRoute>} />
               <Route path="/wallet/settle" element={<ProtectedRoute userType="vendor"><SettlementRequest /></ProtectedRoute>} />
               <Route path="/wallet/settlements" element={<ProtectedRoute userType="vendor"><SettlementHistory /></ProtectedRoute>} />
+
+
+
               <Route path="/profile" element={<ProtectedRoute userType="vendor"><Profile /></ProtectedRoute>} />
               <Route path="/profile/details" element={<ProtectedRoute userType="vendor"><ProfileDetails /></ProtectedRoute>} />
               <Route path="/profile/edit" element={<ProtectedRoute userType="vendor"><EditProfile /></ProtectedRoute>} />

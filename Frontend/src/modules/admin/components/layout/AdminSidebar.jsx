@@ -6,7 +6,6 @@ import { FiHome, FiUsers, FiBriefcase, FiUser, FiShoppingBag, FiGrid, FiFileText
 import adminMenu from "../../config/adminMenu.json";
 import dashboardService from "../../services/dashboardService";
 
-// Icon mapping for menu items
 const iconMap = {
   Dashboard: FiHome,
   Users: FiUsers,
@@ -16,6 +15,7 @@ const iconMap = {
   "User Catalog": FiGrid,
   "Vendor Services": FiGrid,
   "Vendor Parts": FiPackage,
+  "Store Products": FiShoppingBag,
   Payments: BiRupee,
   Reports: FiFileText,
   Notifications: FiBell,
@@ -26,7 +26,6 @@ const iconMap = {
   Plans: FiPackage,
 };
 
-// Helper function to convert child name to route path
 const getChildRoute = (parentRoute, childName) => {
   const routeMap = {
     "/admin/users": {

@@ -41,6 +41,12 @@ const settingsSchema = new mongoose.Schema({
     min: 0,
     max: 100
   },
+  storeCommissionPercentage: {
+    type: Number,
+    default: 10,
+    min: 0,
+    max: 100
+  },
   platformFeePercentage: {
     type: Number,
     default: 1, // 1% default platform fee
@@ -70,6 +76,32 @@ const settingsSchema = new mongoose.Schema({
   searchRadius: {
     type: Number,
     default: 10, // 10 km default search radius
+    min: 1
+  },
+  storeCommissionPercentage: {
+    type: Number,
+    default: 10, // 10% default
+    min: 0,
+    max: 100
+  },
+  storeBatchSize: {
+    type: Number,
+    default: 3,
+    min: 1
+  },
+  storeBatchTimeout: {
+    type: Number,
+    default: 30, // seconds
+    min: 10
+  },
+  storeSearchRadius: {
+    type: Number,
+    default: 10, // km
+    min: 1
+  },
+  storeMaxSearchTime: {
+    type: Number,
+    default: 5, // minutes
     min: 1
   },
   // Razorpay Settings

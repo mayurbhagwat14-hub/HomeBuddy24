@@ -2,6 +2,7 @@ const Booking = require('../../models/Booking');
 const User = require('../../models/User');
 const Settings = require('../../models/Settings');
 const Plan = require('../../models/Plan');
+const StoreOrder = require('../../models/StoreOrder');
 const { validationResult } = require('express-validator');
 const { PAYMENT_STATUS, BOOKING_STATUS } = require('../../utils/constants');
 const { createOrder, verifyPayment, refundPayment } = require('../../services/razorpayService');
@@ -15,6 +16,7 @@ const createPaymentOrder = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log('Create order validation failed:', errors.array(), 'Body:', req.body);
       return res.status(400).json({
         success: false,
         message: 'Validation failed',
@@ -23,36 +25,51 @@ const createPaymentOrder = async (req, res) => {
     }
 
     const userId = req.user.id;
-    const { bookingId } = req.body;
+    const { bookingId, storeOrderId } = req.body;
 
-    // Get booking
-    const booking = await Booking.findOne({ _id: bookingId, userId });
+    let targetDoc, amount, itemNumber;
+    let isStoreOrder = false;
 
-    if (!booking) {
+    if (bookingId) {
+      targetDoc = await Booking.findOne({ _id: bookingId, userId });
+      if (targetDoc) {
+        amount = targetDoc.finalAmount;
+        itemNumber = targetDoc.bookingNumber;
+      }
+    } else if (storeOrderId) {
+      targetDoc = await StoreOrder.findOne({ _id: storeOrderId, user_id: userId });
+      if (targetDoc) {
+        amount = targetDoc.total_amount;
+        itemNumber = targetDoc.orderNumber;
+        isStoreOrder = true;
+      }
+    }
+
+    if (!targetDoc) {
       return res.status(404).json({
         success: false,
-        message: 'Booking not found'
+        message: 'Order or Booking not found'
       });
     }
 
     // Check if payment already done
-    if (booking.paymentStatus === PAYMENT_STATUS.SUCCESS) {
+    if (targetDoc.paymentStatus === PAYMENT_STATUS.SUCCESS) {
       return res.status(400).json({
         success: false,
-        message: 'Payment already completed for this booking'
+        message: 'Payment already completed'
       });
     }
 
     // Create Razorpay order
-    console.log('Creating Razorpay order with amount:', booking.finalAmount);
+    console.log('Creating Razorpay order with amount:', amount);
     const orderResult = await createOrder(
-      booking.finalAmount,
+      amount,
       'INR',
-      booking.bookingNumber,
+      itemNumber,
       {
-        bookingId: booking._id.toString(),
+        [isStoreOrder ? 'storeOrderId' : 'bookingId']: targetDoc._id.toString(),
         userId: userId.toString(),
-        bookingNumber: booking.bookingNumber
+        itemNumber: itemNumber
       }
     );
 
@@ -67,9 +84,9 @@ const createPaymentOrder = async (req, res) => {
       });
     }
 
-    // Update booking with Razorpay order ID
-    booking.razorpayOrderId = orderResult.orderId;
-    await booking.save();
+    // Update DB with Razorpay order ID
+    targetDoc.razorpayOrderId = orderResult.orderId;
+    await targetDoc.save();
 
     res.status(200).json({
       success: true,
@@ -79,7 +96,7 @@ const createPaymentOrder = async (req, res) => {
         amount: orderResult.amount / 100, // Convert back to rupees
         currency: orderResult.currency,
         key: process.env.RAZORPAY_KEY_ID,
-        bookingId: booking._id
+        [isStoreOrder ? 'storeOrderId' : 'bookingId']: targetDoc._id
       }
     });
   } catch (error) {
@@ -113,17 +130,57 @@ const verifyPaymentWebhook = async (req, res) => {
       });
     }
 
-    // Find booking by Razorpay order ID
-    const booking = await Booking.findOne({ razorpayOrderId: razorpay_order_id });
+    // Find booking or store order by Razorpay order ID
+    let booking = await Booking.findOne({ razorpayOrderId: razorpay_order_id });
+    let storeOrder = await StoreOrder.findOne({ razorpayOrderId: razorpay_order_id });
 
-    if (!booking) {
+    if (!booking && !storeOrder) {
       return res.status(404).json({
         success: false,
-        message: 'Booking not found'
+        message: 'Order not found'
       });
     }
 
-    // Update booking payment status
+    if (storeOrder) {
+      // Store Order Payment Logic
+      storeOrder.paymentStatus = PAYMENT_STATUS.SUCCESS;
+      storeOrder.payment_method = 'online';
+      storeOrder.razorpayPaymentId = razorpay_payment_id;
+      storeOrder.paymentId = razorpay_payment_id;
+
+      // Generate OTP for Store Order delivery confirmation
+      storeOrder.customerConfirmationOTP = Math.floor(1000 + Math.random() * 9000).toString();
+
+      await storeOrder.save();
+
+      const Transaction = require('../../models/Transaction');
+      // User payment transaction
+      await Transaction.create({
+        userId: storeOrder.user_id,
+        storeOrderId: storeOrder._id,
+        amount: storeOrder.total_amount,
+        type: 'payment',
+        paymentMethod: 'razorpay',
+        status: 'completed',
+        description: `Online payment for store order ${storeOrder.orderNumber}`,
+        referenceId: razorpay_payment_id
+      });
+
+      // Notify user
+      await createNotification({
+        userId: storeOrder.user_id,
+        type: 'payment_success',
+        title: 'Payment Successful',
+        message: `Payment of ₹${storeOrder.total_amount} for store order ${storeOrder.orderNumber} was successful. Thank you!`,
+        relatedId: storeOrder._id,
+        relatedType: 'payment',
+        priority: 'high'
+      });
+
+      return res.json({ success: true, message: 'Payment verified successfully for Store Order' });
+    }
+
+    // Booking Payment Logic
     booking.paymentStatus = PAYMENT_STATUS.SUCCESS;
     booking.paymentMethod = 'online';
     booking.razorpayPaymentId = razorpay_payment_id;
@@ -652,6 +709,54 @@ const confirmPayAtHome = async (req, res) => {
   }
 };
 
+/**
+ * Confirm Pay on Delivery for Store Orders
+ */
+const confirmStorePayOnDelivery = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { storeOrderId } = req.body;
+    const StoreOrder = require('../../models/StoreOrder');
+
+    const order = await StoreOrder.findOne({ _id: storeOrderId, user_id: userId });
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    if (order.paymentStatus === PAYMENT_STATUS.SUCCESS) {
+      return res.status(400).json({
+        success: false,
+        message: 'Payment already completed for this order'
+      });
+    }
+
+    order.payment_method = 'cash';
+    
+    // Ensure OTP is generated if it's already reached
+    if (order.status === 'reached' && !order.customerConfirmationOTP) {
+      order.customerConfirmationOTP = Math.floor(1000 + Math.random() * 9000).toString();
+    }
+
+    await order.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Order confirmed for Cash on Delivery',
+      data: order
+    });
+  } catch (error) {
+    console.error('Confirm store pay on delivery error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to confirm cash on delivery. Please try again.'
+    });
+  }
+};
+
 const calculateUpgradeAmount = (currentPlan, newPlanPrice) => {
   if (!currentPlan || !currentPlan.isActive) return { amount: newPlanPrice, credit: 0 };
 
@@ -779,6 +884,7 @@ module.exports = {
   processRefund,
   getPaymentHistory,
   confirmPayAtHome,
+  confirmStorePayOnDelivery,
   createPlanOrder,
   verifyPlanPayment,
   getUpgradeDetails

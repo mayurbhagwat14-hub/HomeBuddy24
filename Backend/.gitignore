@@ -48,5 +48,5 @@ check-*.js
 migrate*.js
 
 # Local JSON data exports
-homster-*.json
+homebuddy-*.json
 cloudinary-*.json

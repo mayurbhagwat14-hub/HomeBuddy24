@@ -86,7 +86,7 @@ const categorySchema = new mongoose.Schema({
 });
 
 // Generate slug from title before validation
-categorySchema.pre('validate', async function (next) {
+categorySchema.pre('validate', function (next) {
   if (this.isModified('title') && !this.slug) {
     this.slug = this.title
       .toLowerCase()
